@@ -28,21 +28,10 @@ export default function MobileScreenNav() {
                     ${open ? "opacity-100 translate-y-0 max-h-[500px] pointer-events-auto" : "opacity-0 -translate-y-3 max-h-0 pointer-events-none"}`}
                 >
                     <ul className="flex flex-col p-4 space-y-2 text-center">
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('home') ? '!text-[#F90101]' : ''}`}>
-                            <Link href={route('home')}>Home</Link>
-                        </li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('about_company') ? '!text-[#F90101]' : ''}`}>
-                            <Link href={route('about_company')}>About My Company</Link>
-                        </li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('about_me') ? '!text-[#F90101]' : ''}`}>
-                            <Link href={route('about_me')}>About Me</Link>
-                        </li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('sample-script') ? '!text-[#F90101]' : ''}`}>
-                            <Link href={route('sample-script')}>Sample Scripts</Link>
-                        </li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('contact_details') ? '!text-[#F90101]' : ''}`}>
-                            <Link href={route('contact_details')}>Contact Details</Link>
-                        </li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('home') ? '!text-[#F90101]' : ''}`}><Link href={route('home')}>Home</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('about_me') ? '!text-[#F90101]' : ''}`}><Link >About Us</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('sample-script') ? '!text-[#F90101]' : ''}`}><Link >Distributor / Partner Page</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('contact_details') ? '!text-[#F90101]' : ''}`}><Link >Contact Us Page</Link></li>
                     </ul>
                 </div>
             )}

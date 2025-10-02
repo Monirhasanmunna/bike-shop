@@ -7,12 +7,12 @@ export default function Main({children}){
     setTimeout(() => window.HSStaticMethods.autoInit(), 100)
 
     const {app_settings, fileBase} = usePage().props
-    const favicon = app_settings['favicon'] ? JSON.parse(app_settings['favicon']['value']) : null;
+    // const favicon = app_settings['favicon'] ? JSON.parse(app_settings['favicon']['value']) : null;
 
     return (
         <>
             <Head>
-                <link rel="icon" type="image/svg+xml" href={fileBase + '/' +favicon?.path} />
+                <link rel="icon" type="image/svg+xml" href="" />
             </Head>
 
             <Header/>

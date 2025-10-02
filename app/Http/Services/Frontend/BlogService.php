@@ -25,28 +25,7 @@ class BlogService
                 return $this->response()->error($validationErrorMsg);
             }
 
-            if (!array_key_exists('graph', $query)) {
-                $query['graph'] = '{image,title,description}';
-                $query['status'] = STATUS_ACTIVE;
-            }
-
-            $dbQuery = BlogSection::query();
-            $dbQuery = QueryAssist::queryOrderBy($dbQuery, $query);
-            $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['status', 'page_name']);
-            $dbQuery = QueryAssist::queryGraphSQL($dbQuery, $query, new BlogSection);
-            $blogs   = $dbQuery->get();
-
-            $heroSection = HeroSection::where('page_name', $query['page_name'])->select('title', 'image', 'description')->first();
-
-            $query['page_name'] = 'about-me-bio';
-            $dbQuery = BlogSection::query();
-            $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['page_name']);
-            $bio_section = $dbQuery->first();
-
             return $this->response([
-                'blogs' => $blogs,
-                'hero_section' => $heroSection,
-                'bio_section' => $bio_section,
                 ...$query
             ])->success();
         }

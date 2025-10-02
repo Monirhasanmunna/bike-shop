@@ -8,10 +8,9 @@ export default function LargeScreenNav() {
                 <div className={`flex gap-x-10 items-center py-3`}>
                     <ul className={`flex items-center gap-x-10 `}>
                         <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('home') ? 'active' : ''}`}><Link href={route('home')}>Home</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('about_company') ? 'active' : ''}`}><Link href={route('about_company')}>About My Company</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('about_me') ? 'active' : ''}`}><Link href={route('about_me')}>About Me</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('sample-script') ? 'active' : ''}`}><Link href={route('sample-script')}>Sample Scripts</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('contact_details') ? 'active' : ''}`}><Link href={route('contact_details')}>Contact Details</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('about_me') ? 'active' : ''}`}><Link >About Us</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('sample-script') ? 'active' : ''}`}><Link >Distributor / Partner Page</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('contact_details') ? 'active' : ''}`}><Link >Contact Us Page</Link></li>
                     </ul>
                 </div>
                 <div className={`p-5`}>

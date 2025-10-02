@@ -10,7 +10,7 @@ class HeroSection extends Model
     use Uuid;
     protected $fillable = [
         'title',
-        'description',
+        'subtitle',
         'image',
         'page_name'
     ];

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title')->nullable();
-            $table->text('description')->nullable();
+            $table->string('subtitle')->nullable();
             $table->string('image')->nullable();
             $table->string('page_name', 50)->unique();
             $table->timestamps();

@@ -12,22 +12,22 @@ import Alert from "@/Components/Utils/Alert/Alert.jsx";
 import {FaPencil} from "react-icons/fa6";
 import {FaTrash} from "react-icons/fa";
 import {HSOverlay} from "preline";
-import BlogForm from "@/Components/Segment/Backend/AboutCompany/Blog/BlogFrom.jsx";
+import ProductForm from "@/Components/Segment/Backend/Product/ProductFrom.jsx";
 import truncate from "html-truncate";
 
 
-export default function Page({data: blogListData}){
+export default function Page({data: productListData}){
     const {fileBase} = usePage().props
-    const [pagination, setPagination] = useState({page: blogListData.page, length: blogListData.length})
+    const [pagination, setPagination] = useState({page: productListData.page, length: productListData.length})
     const [searchText, setSearchText] = useState('')
     const [go, setGo] = useState(false)
-    const [blog, setBlog] = useState(null)
+    const [product, setProduct] = useState(null)
     const [alertData, setAlertData] = useState({route : '', color : '', method : '', text : ''});
 
 
     useEffect(() => {
-        setPaginationFromSessionStorage(setPagination, 'blog_pagination', {
-            page: blogListData?.page, length: blogListData?.length, status: blogListData.status, searchText: ""
+        setPaginationFromSessionStorage(setPagination, 'product_pagination', {
+            page: productListData?.page, length: productListData?.length, status: productListData.status, searchText: ""
         }, )
     }, []);
 
@@ -48,26 +48,26 @@ export default function Page({data: blogListData}){
             if (pagination.status) queryParams.status = pagination.status;
             if (pagination.searchText) queryParams.search = pagination.searchText;
 
-            router.get(route('admin.about-company.blog.list', queryParams))
+            router.get(route('admin.product.list', queryParams))
 
-            sessionStorage.setItem('blog_pagination', JSON.stringify(pagination))
+            sessionStorage.setItem('product_pagination', JSON.stringify(pagination))
         }
     }, [go]);
 
 
-    const editDestination = (blog, imagePath=null) => {
-        setBlog({
-            ...blog,
+    const editDestination = (product, imagePath=null) => {
+        setProduct({
+            ...product,
             imagePath
         })
-        HSOverlay.open('#blog-form')
+        HSOverlay.open('#product-form')
     }
 
 
     const alert = (id) => {
         setAlertData({
             ...alertData,
-            route : `/admin/about-company/blog/delete/${id}`,
+            route : `/admin/product/delete/${id}`,
             color : 'red',
             method : 'delete',
             text : 'Are you sure you want to delete this ?'
@@ -88,13 +88,13 @@ export default function Page({data: blogListData}){
                             </svg>
                         </li>
                         <li className="flex items-center text-sm text-gray-800 dark:text-neutral-400">
-                            About Company
+                            Product
                             <svg className="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-neutral-500" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                             </svg>
                         </li>
                         <li className="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                            Blog Section
+                            List
                         </li>
                     </ol>
                 </div>
@@ -102,12 +102,12 @@ export default function Page({data: blogListData}){
                 <div className="w-full border border-gray-300 rounded mt-5">
                     <div className="flex items-center justify-between border-b border-gray-300 px-5 py-3">
                         <div className="flex items-center gap-x-6">
-                            <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Blog</h2>
+                            <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Product</h2>
                         </div>
-                        <button onClick={() => setBlog(null)} type="button"
+                        <button onClick={() => setProduct(null)} type="button"
                                 className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-yellow-400 text-black hover:bg-yellow-500"
-                                aria-haspopup="dialog" aria-expanded="false" aria-controls="blog-form"
-                                data-hs-overlay="#blog-form">
+                                aria-haspopup="dialog" aria-expanded="false" aria-controls="product-form"
+                                data-hs-overlay="#product-form">
                             Add New
                         </button>
                     </div>
@@ -122,7 +122,7 @@ export default function Page({data: blogListData}){
                                 placeholder={pagination.length}
                             />
                             <div className="flex flex-col md:flex-row items-center md:justify-end gap-3 flex-wrap">
-                                <StatusFilter status={blogListData.blogStatus} pagination={pagination} setPagination={setPagination} setGo={setGo} segment="Blog" />
+                                <StatusFilter status={productListData.productStatus} pagination={pagination} setPagination={setPagination} setGo={setGo} segment="Product" />
 
                                 <SearchBox
                                     searchText={searchText}
@@ -150,7 +150,7 @@ export default function Page({data: blogListData}){
                                         Image
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                        Title
+                                        Name
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                         Description
@@ -166,33 +166,33 @@ export default function Page({data: blogListData}){
 
                                 <tbody>
                                 {
-                                    blogListData.blogs.map((blog) => (
-                                        <tr key={blog.id} className={`hover:bg-gray-100 dark:hover:bg-neutral-600 ${blog.status === STATUS_DELETED ? 'bg-red-300 hover:bg-red-300 dark:hover:bg-red-300' : ''}`}>
+                                    productListData.products.map((product) => (
+                                        <tr key={product.id} className={`hover:bg-gray-100 dark:hover:bg-neutral-600 ${product.status === STATUS_DELETED ? 'bg-red-300 hover:bg-red-300 dark:hover:bg-red-300' : ''}`}>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 <div className="w-[90px] h-[50px] border border-gray-300">
-                                                    <img src={fileBase + '/' + blog.image} className={`w-full h-full object-cover`} alt="blog"/>
+                                                    <img src={fileBase + '/' + product.image} className={`w-full h-full object-cover`} alt="product"/>
                                                 </div>
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                                <span dangerouslySetInnerHTML={{ __html: blog.title }} />
+                                                <span dangerouslySetInnerHTML={{ __html: product.name }} />
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                                <span dangerouslySetInnerHTML={{ __html: truncate(blog.description, 60) }} />
+                                                <span dangerouslySetInnerHTML={{ __html: truncate(product.description, 60) }} />
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 {
-                                                    blog.status === STATUS_DELETED ? (<span className={`capitalize`}>{blog.status}</span>) : (
+                                                    product.status === STATUS_DELETED ? (<span className={`capitalize`}>{product.status}</span>) : (
                                                         <select
                                                             className={`py-1 px-2 border w-auto min-w-[150px] text-[14px] outline-none focus:ring-0 text-neutral-700 dark:text-neutral-600 border-neutral-300 dark:border-neutral-400`}
-                                                            value={blog.status}
+                                                            value={product.status}
                                                             onChange={(e) => {
-                                                                router.post(route('admin.about-company.blog.change_status'), {
-                                                                    id: blog.id, status: e.target.value
+                                                                router.post(route('admin.product.change_status'), {
+                                                                    id: product.id, status: e.target.value
                                                                 })
                                                             }}
                                                         >
-                                                            {Object.keys(blogListData.blogStatus).filter(key => key !== STATUS_DELETED).map((key) => {
-                                                                const statusText = blogListData.blogStatus[key];
+                                                            {Object.keys(productListData.productStatus).filter(key => key !== STATUS_DELETED).map((key) => {
+                                                                const statusText = productListData.productStatus[key];
                                                                 return <option key={key} value={key}>{statusText}</option>
                                                             })}
                                                         </select>
@@ -202,11 +202,11 @@ export default function Page({data: blogListData}){
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 <div className="w-full flex gap-x-6">
                                                     <button className="cursor-pointer text-white border-green-500"
-                                                            onClick={() => editDestination(blog, fileBase + '/' + blog.image)}>
+                                                            onClick={() => editDestination(product, fileBase + '/' + product.image)}>
                                                         <FaPencil className={`text-blue-400 text-lg`}/>
                                                     </button>
                                                     <button className=" cursor-pointer text-white border-green-500"
-                                                            onClick={() => alert(blog.id)}>
+                                                            onClick={() => alert(product.id)}>
                                                         <FaTrash className={`text-red-400 text-lg`}/>
                                                     </button>
                                                 </div>
@@ -220,14 +220,14 @@ export default function Page({data: blogListData}){
                             <div className="py-3 sm:px-6">
                                 <div className="flex flex-col sm:flex-row gap-2 items-center justify-between">
                                     <Summary
-                                        page={blogListData.page}
-                                        length={blogListData.length}
-                                        count={blogListData.count}
+                                        page={productListData.page}
+                                        length={productListData.length}
+                                        count={productListData.count}
                                     />
                                     <Navigation
                                         page={pagination.page}
-                                        length={blogListData.length}
-                                        count={blogListData.count}
+                                        length={productListData.length}
+                                        count={productListData.count}
                                         callback={cp => {
                                             setPagination(state => ({...state, page: cp}))
                                             setGo(true)
@@ -239,7 +239,7 @@ export default function Page({data: blogListData}){
                     </div>
                 </div>
             </Main>
-            <BlogForm blog={blog} setBlog={setBlog} />
+            <ProductForm product={product} setProduct={setProduct} />
             <Alert alertData={alertData} />
         </>
 )

@@ -13,7 +13,7 @@ export default function Header(){
                     <ul className="flex lg:justify-between items-center gap-1.5 w-[225px]">
                         <li className="inline-flex items-center relative text-gray-200 pe-1.5  dark:text-neutral-200 dark:after:bg-neutral-700">
                             <div className="shrink-0 w-24">
-                                <img src={`${fileBase}/${logo.path}`} alt="logo"/>
+                                <img src="" alt="logo"/>
                             </div>
 
                             <div className="hidden sm:block ms-1">

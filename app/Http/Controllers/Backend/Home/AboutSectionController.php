@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend\AboutMe;
+namespace App\Http\Controllers\Backend\Home;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\HeroSection\HeroSectionUpdateRequest;
-use App\Http\Services\Backend\HeroSectionService;
+use App\Http\Services\Backend\AboutSectionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class HeroSectionController extends Controller
+class AboutSectionController extends Controller
 {
 
-    public function __construct( private readonly HeroSectionService $service){}
+    public function __construct( private readonly AboutSectionService $service){}
 
     /**
      * @param Request $request
@@ -21,20 +21,25 @@ class HeroSectionController extends Controller
      */
     public function getData(Request $request): Response|RedirectResponse
     {
-        $response = $this->handleSession( $this->service->getData( ['page_name' => ABOUT_ME_PAGE]));
+        $response = $this->handleSession( $this->service->getData($request->query()) );
 
         return $response['success'] ?
-            Inertia::render('Backend/AboutMe/Page', $response)
+            Inertia::render('Backend/AboutSection/Page', $response)
             : back()->withErrors($response['message']);
     }
 
-
     /**
-     * @param HeroSectionUpdateRequest $request
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function update(HeroSectionUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5112',
+        ]);
+
         $response = $this->handleSession( $this->service->updateData( $request->all()));
 
         return $response['success'] ?
