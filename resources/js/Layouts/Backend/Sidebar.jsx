@@ -1,11 +1,7 @@
 
 import {Link, usePage} from "@inertiajs/react";
 import {IoHomeSharp} from "react-icons/io5";
-import {BsFillInfoSquareFill} from "react-icons/bs";
-import {TbListDetails} from "react-icons/tb";
-import {MdContactMail, MdVideoLibrary} from "react-icons/md";
 import {FaGear} from "react-icons/fa6";
-import {IoMdContacts} from "react-icons/io";
 
 export default function Sidebar() {
     const { url: currentUrl } = usePage()
@@ -40,6 +36,13 @@ export default function Sidebar() {
                             <Link href={route('admin.about_section.page')} className={`${route().current('admin.about_section.page') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
                                 <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                                 About Section
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href={route('admin.page.list')} className={`${route().current('admin.page.list') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
+                                <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                Page
                             </Link>
                         </li>
 

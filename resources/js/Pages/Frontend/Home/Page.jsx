@@ -1,27 +1,30 @@
 import React from "react";
 import Main from "@/Layouts/Frontend/Main.jsx";
 import {Link, usePage} from "@inertiajs/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const Page = ({ data }) => {
     const {fileBase} = usePage().props
-    const {hero_section} = data;
+    const {hero_section, about_section, distributors, products} = data;
+
     return (
         <Main>
             {/* Hero Section */}
             <section
                 className="relative h-screen flex items-center justify-center bg-cover bg-center"
                 style={{
-                    backgroundImage:
-                        "url('https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?auto=format&fit=crop&w=1600&q=80')",
+                    backgroundImage: `url(${hero_section?.image})`,
                 }}
             >
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="relative z-10 text-center text-white max-w-3xl px-4">
-                    <h1 className="text-3xl md:text-6xl font-bold mb-4">
-                        Global Standard in Car Care Solutions
+                    <h1 className="text-3xl md:text-6xl font-bold mb-4" dangerouslySetInnerHTML={{__html: hero_section?.title}}>
+
                     </h1>
-                    <p className="text-base md:text-2xl mb-6">
-                        Premium Tyre Sealants, Oils & Car Care Products trusted worldwide.
+                    <p className="text-base md:text-2xl mb-6" dangerouslySetInnerHTML={{__html: hero_section?.subtitle}}>
+
                     </p>
                     <div className="flex flex-col md:flex-row gap-4 justify-center">
                         <Link
@@ -44,7 +47,7 @@ const Page = ({ data }) => {
                     {/* Optional image or illustration */}
                     <div className="md:w-1/2 flex justify-center">
                         <img
-                            src="/assets/images/about-illustration.png"
+                            src={`${fileBase}/${about_section?.image}`}
                             alt="About Zelto Global"
                             className="w-full max-w-sm h-auto rounded-xl object-cover"
                         />
@@ -52,12 +55,8 @@ const Page = ({ data }) => {
 
                     {/* Text content */}
                     <div className="md:w-1/2 text-center md:text-left">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">About Zelto Global</h2>
-                        <p className="text-gray-700 mb-6 text-base md:text-lg">
-                            Zelto Global is an international producer & distributor of high-quality
-                            automotive care products, trusted in multiple countries. We focus on innovation,
-                            eco-friendly solutions, and a strong global distribution network.
-                        </p>
+                        <h2 className="text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{__html: about_section?.title}}></h2>
+                        <p className="text-gray-700 mb-6 text-base md:text-lg" dangerouslySetInnerHTML={{__html: about_section?.description}}></p>
                         <Link
                             className="inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition"
                         >
@@ -74,24 +73,21 @@ const Page = ({ data }) => {
                     Featured Products
                 </h2>
                 <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                    {["Tyre Sealant", "Car Polish", "Brake Oil", "Fork Oil"].map(
-                        (product, index) => (
-                            <div
-                                key={index}
+                    {
+                        products.map((product) => (
+                            <Link href={route('product_details', {slug:product.slug})}
+                                key={product.id}
                                 className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl overflow-hidden flex flex-col border border-gray-100"
                             >
                                 <div className="w-full flex justify-center bg-gray-50">
                                     <img
-                                        src="/assets/images/product.jpg"
+                                        src={`${fileBase}/${product?.image}`}
                                         alt={product}
                                         className="w-full h-auto max-h-68 object-cover"
                                     />
                                 </div>
                                 <div className="p-6 flex flex-col items-center text-center flex-1">
-                                    <h3 className="font-semibold text-lg mb-2">{product}</h3>
-                                    <p className="text-sm text-gray-500 mb-4">
-                                        High-quality {product.toLowerCase()} trusted worldwide.
-                                    </p>
+                                    <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
                                     {/* QR Code Placeholder */}
                                     <div className="w-full h-20 mt-auto">
                                         <img
@@ -101,9 +97,9 @@ const Page = ({ data }) => {
                                         />
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    )}
+                            </Link>
+                        ))
+                    }
                 </div>
             </section>
 
@@ -154,20 +150,36 @@ const Page = ({ data }) => {
 
 
             {/* Testimonials / Partners */}
-            <section className="py-16 bg-gray-50 text-center px-4">
-                <h2 className="text-2xl md:text-3xl font-bold mb-8">
+            <section className="py-16 max-w-6xl mx-auto px-4">
+                <h2 className="text-2xl md:text-3xl text-center font-bold mb-8">
                     Trusted by Workshops & Distributors
                 </h2>
-                <div className="flex justify-center gap-8 flex-wrap">
-                    {[1, 2, 3].map((logo) => (
-                        <img
-                            key={logo}
-                            src="https://via.placeholder.com/120x60"
-                            alt="Partner Logo"
-                            className="grayscale max-w-full h-auto"
-                        />
+                <Swiper
+                    modules={[Autoplay]}
+                    spaceBetween={30}
+                    slidesPerView={2}
+                    autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    }}
+                    loop={true}
+                    breakpoints={{
+                        640: { slidesPerView: 3 },
+                        768: { slidesPerView: 4 },
+                        1024: { slidesPerView: 6 },
+                    }}
+                    className="flex items-center"
+                >
+                    {distributors.map((distributor) => (
+                        <SwiperSlide key={distributor.id} className="flex justify-center">
+                            <img
+                                src={`${fileBase}/${distributor?.image}`}
+                                alt={distributor?.title}
+                                className="h-[150px] w-full rounded object-cover"
+                            />
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
             </section>
         </Main>
     );

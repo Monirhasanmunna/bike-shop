@@ -85,6 +85,7 @@ class HeroSectionService
         ];
 
         if(!empty($payload['description']) && array_key_exists('description', $payload))  $data['description'] = $payload['description'];
+        if(!empty($payload['subtitle']) && array_key_exists('subtitle', $payload))  $data['subtitle'] = $payload['subtitle'];
 
         return $data;
     }
@@ -101,6 +102,7 @@ class HeroSectionService
 
         if(array_key_exists('title', $payload) && !empty($payload['title']))                $data['title']          = $payload['title'];
         if(array_key_exists('description', $payload) && !empty($payload['description']))    $data['description']    = $payload['description'];
+        if(array_key_exists('subtitle', $payload) && !empty($payload['subtitle']))          $data['subtitle']       = $payload['subtitle'];
         if($imageName)                                                                           $data['image']          = $imageName;
 
         return $data;
