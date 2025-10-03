@@ -20,7 +20,7 @@ export default function Sidebar() {
     lg:block lg:-translate-x-full lg:end-auto lg:bottom-0
     dark:bg-neutral-900" role="dialog" tabIndex="-1" aria-label="Sidebar">
         <div className="lg:pt-13 relative flex flex-col h-full max-h-full">
-                <nav className="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+                <nav className="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open="true">
                     <ul className="flex flex-col space-y-1">
                         <li>
                             <Link href={route('dashboard')} className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white">
@@ -59,6 +59,28 @@ export default function Sidebar() {
                                         <Link href={route('admin.product.list')} className={`flex items-center gap-x-2.5 pr-2.5 py-1 text-[15px] text-gray-800 rounded-lg ${route().current('admin.product.list') ? 'bg-gray-50' : ''} hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200`}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 15a3 3 0 1 1 0-6a3 3 0 0 1 0 6Z"/></svg>
                                             Product List
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li className={`hs-accordion ${route().current('admin.distributor.*') ? 'active' : ''}`} id="account-accordion">
+                            <button type="button" className={`hs-accordion-toggle ${route().current('admin.distributor.*') ? 'bg-gray-200 ' : ''}w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-[15px] text-gray-800 rounded-lg hs-accordion-active:rounded-b-none hover:bg-gray-100 focus:outline-hidden focus:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200" aria-expanded="true" aria-controls="account-accordion-child`}>
+                                <IoHomeSharp className={`size-4.5`} />
+                                Distributor
+
+                                <svg className="hs-accordion-active:block ms-auto hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+
+                                <svg className="hs-accordion-active:hidden ms-auto block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
+
+                            <div id="account-accordion-child" className={`${route().current('admin.distributor.*') ? 'block' : 'hidden'} hs-accordion-content bg-gray-200 w-full overflow-hidden transition-[height] duration-300 hidden" role="region" aria-labelledby="account-accordion`}>
+                                <ul className="p-1.5 space-y-1">
+                                    <li>
+                                        <Link href={route('admin.distributor.list')} className={`flex items-center gap-x-2.5 pr-2.5 py-1 text-[15px] text-gray-800 rounded-lg ${route().current('admin.distributor.list') ? 'bg-gray-50' : ''} hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200`}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 15a3 3 0 1 1 0-6a3 3 0 0 1 0 6Z"/></svg>
+                                            Distributor List
                                         </Link>
                                     </li>
                                 </ul>

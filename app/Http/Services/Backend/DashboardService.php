@@ -16,11 +16,9 @@ class DashboardService
     {
         try {
             $uniqueVisitor = Visitor::all()->count();
-            $totalContact  = Contact::all()->count();
 
            return $this->response([
                'unique_visitor' => $uniqueVisitor,
-               'total_contact' => $totalContact,
            ])->success();
         } catch (\Exception $exception) {
             return $this->response( )->error($exception->getMessage());
