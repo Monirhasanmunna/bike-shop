@@ -22,7 +22,7 @@ const Main = ({children}) => {
             <div>
                 <Header />
             </div>
-            <div className="">
+            <div className="mt-14 md:mt-0">
                 {children}
             </div>
             <div>

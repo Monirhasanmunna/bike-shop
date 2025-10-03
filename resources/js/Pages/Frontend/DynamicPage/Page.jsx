@@ -7,7 +7,7 @@ export default function DynamicPage({ data: pageData }) {
     return (
         <Main>
             <div className="min-h-screen px-4 py-12 bg-gray-50">
-                <div className="container mx-auto bg-white rounded-2xl shadow p-6 md:p-10">
+                <div className="container mx-auto min-h-screen bg-white rounded-2xl shadow p-6 md:p-10">
 
                     {/* Title */}
                     <div className="flex justify-center">

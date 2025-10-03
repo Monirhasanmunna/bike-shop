@@ -3,7 +3,7 @@ import {FaArrowLeft, FaBars} from "react-icons/fa";
 import {useEffect, useRef, useState} from "react";
 import {HSOverlay} from "preline";
 
-export default function MobileScreenNav() {
+export default function MobileScreenNav({pages}) {
     const [open, setOpen] = useState(false);
     const {fileBase, logo} = usePage().props
 
@@ -29,9 +29,11 @@ export default function MobileScreenNav() {
                 >
                     <ul className="flex flex-col p-4 space-y-2 text-center">
                         <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('home') ? '!text-[#F90101]' : ''}`}><Link href={route('home')}>Home</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('about_me') ? '!text-[#F90101]' : ''}`}><Link >About Us</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('sample-script') ? '!text-[#F90101]' : ''}`}><Link >Distributor / Partner Page</Link></li>
-                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('contact_details') ? '!text-[#F90101]' : ''}`}><Link >Contact Us Page</Link></li>
+                        {
+                            pages.map((page) => (
+                                <li key={page.id} className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('page', {slug: page.slug}) ? '!text-[#F90101]' : ''}`}><Link href={route('page', {slug: page.slug})}>{page.title}</Link></li>
+                            ))
+                        }
                     </ul>
                 </div>
             )}
