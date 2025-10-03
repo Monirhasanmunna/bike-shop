@@ -29,6 +29,15 @@ class PageController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function create(): Response
+    {
+        return Inertia::render('Backend/DynamicPage/Create/Page');
+    }
+
+
+    /**
      * @param Request $request
      * @return RedirectResponse
      */
@@ -42,10 +51,18 @@ class PageController extends Controller
         $response = $this->handleSession( $this->service->storeData( $request->all()));
 
         return $response['success'] ?
-            back()->with($response)
+            to_route('admin.page.list')->with($response)
             : back()->withErrors($response['message']);
     }
 
+    public function edit(string $id): Response
+    {
+        $response = $this->service->editData( $id );
+
+        return $response['success'] ?
+            Inertia::render('Backend/DynamicPage/Create/Page', $response)
+            : back()->withErrors($response['message']);
+    }
 
     /**
      * @param Request $request
@@ -61,7 +78,7 @@ class PageController extends Controller
         $response = $this->handleSession( $this->service->updateData( $request->all()));
 
         return $response['success'] ?
-            back()->with($response)
+            to_route('admin.page.list')->with($response)
             : back()->withErrors($response['message']);
     }
 

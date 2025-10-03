@@ -72,6 +72,21 @@ class PageService
 
 
     /**
+     * @param string $id
+     * @return array
+     */
+    public function editData(string $id): array
+    {
+        $page = Page::where('id', $id)->first();
+
+        if(!$page) {
+            return $this->response()->error('Page not found');
+        }
+
+        return $this->response(['page' => $page])->success();
+    }
+
+    /**
      * @param array $payload
      * @return array
      */

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {setPaginationFromSessionStorage} from "@/helpers/helper.js";
 import Main from "@/Layouts/Backend/Main.jsx";
-import {router, usePage} from "@inertiajs/react";
+import {Link, router, usePage} from "@inertiajs/react";
 import LengthDropdown from "@/Components/Utils/Pagination/LengthDropdown.jsx";
 import SearchBox from "@/Components/Utils/Pagination/SearchBox.jsx";
 import StatusFilter from "@/Components/Utils/Pagination/StatusFilter.jsx";
@@ -103,12 +103,12 @@ export default function Page({data: pageListData}){
                         <div className="flex items-center gap-x-6">
                             <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Page</h2>
                         </div>
-                        <button onClick={() => setPage(null)} type="button"
+                        <Link href={route('admin.page.create')}
                                 className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-yellow-400 text-black hover:bg-yellow-500"
                                 aria-haspopup="dialog" aria-expanded="false" aria-controls="page-form"
                                 data-hs-overlay="#page-form">
                             Add New
-                        </button>
+                        </Link>
                     </div>
 
                     <div className="w-full p-5">
@@ -145,14 +145,11 @@ export default function Page({data: pageListData}){
                             <table className="min-w-full border border-neutral-300 dark:border-neutral-400 border-collapse text-sm">
                                 <thead className="bg-gray-100 dark:bg-neutral-700">
                                 <tr>
-                                    <th className="w-[15%] px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                        Image
+                                    <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
+                                        Title
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                        Name
-                                    </th>
-                                    <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                        Description
+                                        Content
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                         Status
@@ -168,15 +165,10 @@ export default function Page({data: pageListData}){
                                     pageListData.pages.map((page) => (
                                         <tr key={page.id} className={`hover:bg-gray-100 dark:hover:bg-neutral-600 ${page.status === STATUS_DELETED ? 'bg-red-300 hover:bg-red-300 dark:hover:bg-red-300' : ''}`}>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                                <div className="w-[90px] h-[50px] border border-gray-300">
-                                                    <img src={fileBase + '/' + page.image} className={`w-full h-full object-cover`} alt="page"/>
-                                                </div>
+                                                <span dangerouslySetInnerHTML={{ __html: page.title }} />
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                                <span dangerouslySetInnerHTML={{ __html: page.name }} />
-                                            </td>
-                                            <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
-                                                <span dangerouslySetInnerHTML={{ __html: truncate(page.description, 60) }} />
+                                                <span dangerouslySetInnerHTML={{ __html: truncate(page.content, 60) }} />
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 {
@@ -200,10 +192,9 @@ export default function Page({data: pageListData}){
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 <div className="w-full flex gap-x-6">
-                                                    <button className="cursor-pointer text-white border-green-500"
-                                                            onClick={() => editPage(page)}>
+                                                    <Link href={route('admin.page.edit', {id:page.id})} className="cursor-pointer text-white border-green-500">
                                                         <FaPencil className={`text-blue-400 text-lg`}/>
-                                                    </button>
+                                                    </Link>
                                                     <button className=" cursor-pointer text-white border-green-500"
                                                             onClick={() => alert(page.id)}>
                                                         <FaTrash className={`text-red-400 text-lg`}/>

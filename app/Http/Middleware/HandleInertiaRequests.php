@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\AppSetting;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,6 +42,7 @@ class HandleInertiaRequests extends Middleware
             'favicon' => isset($settings['favicon']) ? json_decode($settings['favicon']->value, true) : null,
             'logo' => isset($settings['logo']) ? json_decode($settings['logo']->value, true) : null,
             'app_settings' => $settings,
+            'pages' => Page::where('status', STATUS_ACTIVE)->select('id', 'title', 'slug')->get(),
         ];
     }
 }

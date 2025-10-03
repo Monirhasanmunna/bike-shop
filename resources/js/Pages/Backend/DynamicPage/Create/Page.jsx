@@ -4,21 +4,21 @@ import {Link, useForm} from "@inertiajs/react";
 import {HSOverlay} from "preline";
 import Button from "@/Components/Utils/Button/Button.jsx";
 import TextEditor from "@/Components/Utils/TextEditor/TextEditor.jsx";
-import Main from "@/Layouts/Frontend/Main.jsx";
+import Main from "@/Layouts/Backend/Main.jsx";
 
-export default function Page({page}){
+export default function Page({data: pageData}){
     const {data, setData, post, processing, errors, reset} = useForm({
         title: '',
         content: '',
     });
 
     useEffect(() => {
-        if(page){
+        if(pageData?.page){
             setData({
                 ...data,
-                title: page.title ?? '',
-                content: page.content ?? '',
-                id: page.id ?? ''
+                title: pageData?.page.title ?? '',
+                content: pageData?.page.content ?? '',
+                id: pageData?.page.id ?? ''
             })
         } else {
             setData({
@@ -26,13 +26,13 @@ export default function Page({page}){
                 content: '',
             })
         }
-    }, [page])
+    }, [pageData?.page])
 
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
 
-        if(!page){
+        if(!pageData?.page){
             post(route('admin.page.store'), {
                 preserveState: true,
                 preserveScroll: true,
@@ -70,17 +70,17 @@ export default function Page({page}){
                         </svg>
                     </li>
                     <li className="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                        Create
+                        {pageData?.page ? 'Edit' : 'Create'}
                     </li>
                 </ol>
             </div>
             <div className="w-full border border-gray-300 rounded mt-5">
                 <div className="flex items-center justify-between border-b border-gray-300 px-5 py-3">
                     <div className="flex items-center gap-x-6">
-                        <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Page Create</h2>
+                        <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Page {pageData?.page ? 'Update' : 'Update'}</h2>
                     </div>
-                    <Link
-                            className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-yellow-400 text-black hover:bg-yellow-500"
+                    <Link  href={route('admin.page.list')}
+                            className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-gray-400 text-black hover:bg-gray-500"
                             aria-haspopup="dialog" aria-expanded="false" aria-controls="page-form"
                             data-hs-overlay="#page-form">
                         Back
@@ -89,8 +89,8 @@ export default function Page({page}){
                 <div className="p-4 overflow-y-auto">
                     <form onSubmit={handleSubmitForm}  className={`w-full space-y-2`}>
                         <div className="form-control">
-                            <label htmlFor="name" className={`label`}>Name <span className={`text-xs text-red-600`}>*</span></label>
-                            <input type="text" className={`input`} value={data.name} onChange={(e) => setData(prev => ({...prev, name: e.target.value}))}/>
+                            <label htmlFor="title" className={`label`}>Name <span className={`text-xs text-red-600`}>*</span></label>
+                            <input type="text" className={`input`} value={data.title} onChange={(e) => setData(prev => ({...prev, title: e.target.value}))}/>
                         </div>
 
                         <div className="form-control">
@@ -100,13 +100,7 @@ export default function Page({page}){
 
                         <div className="form-control pt-4">
                             <div className="w-full flex gap-x-4">
-                                <Button buttonText={!page ? 'Create' : 'Update'} isLoading={processing} />
-                                <Button
-                                    buttonText={'Cancel'}
-                                    type={`button`}
-                                    callback={() => HSOverlay.close("#page-form")}
-                                    className={`bg-red-500 text-white rounded hover:bg-red-600 duration-150`}
-                                />
+                                <Button buttonText={!pageData?.page ? 'Create' : 'Update'} isLoading={processing} />
                             </div>
                         </div>
                     </form>
