@@ -4,6 +4,7 @@ import {Link, usePage} from "@inertiajs/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import QRCode from "react-qr-code";
 
 const Page = ({ data }) => {
     const {fileBase} = usePage().props
@@ -83,17 +84,15 @@ const Page = ({ data }) => {
                                     <img
                                         src={`${fileBase}/${product?.image}`}
                                         alt={product}
-                                        className="w-full h-auto max-h-68 object-cover"
+                                        className="w-full h-68 object-cover"
                                     />
                                 </div>
                                 <div className="p-6 flex flex-col items-center text-center flex-1">
                                     <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                                    {/* QR Code Placeholder */}
-                                    <div className="w-full h-20 mt-auto">
-                                        <img
-                                            src="/assets/images/barcode.jpg"
-                                            alt="QR Code"
-                                            className="w-full h-full object-contain"
+                                    <div className="mt-3">
+                                        <QRCode
+                                            value={route('warranty', product.slug)}
+                                            size={80}
                                         />
                                     </div>
                                 </div>
