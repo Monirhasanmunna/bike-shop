@@ -14,21 +14,23 @@ const Main = ({children}) => {
     const favicon = app_settings['favicon'] ? JSON.parse(app_settings['favicon']['value']) : null;
 
     return (
-        <div className="overflow-hidden bg-[#FFFFFF]">
-            <Head>
-                <link rel="icon" type="image/svg+xml" href={fileBase + '/' +favicon?.path} />
-            </Head>
+        <>
             <Notifier/>
-            <div>
-                <Header />
+            <div className="overflow-hidden bg-[#FFFFFF]">
+                <Head>
+                    <link rel="icon" type="image/svg+xml" href={fileBase + '/' +favicon?.path} />
+                </Head>
+                <div>
+                    <Header />
+                </div>
+                <div className="mt-14 md:mt-0">
+                    {children}
+                </div>
+                <div>
+                    <Footer social_links={social_links} contact_info={contact_info} copyright={copyright} />
+                </div>
             </div>
-            <div className="mt-14 md:mt-0">
-                {children}
-            </div>
-            <div>
-                <Footer social_links={social_links} contact_info={contact_info} copyright={copyright} />
-            </div>
-        </div>
+        </>
     )
 }
 

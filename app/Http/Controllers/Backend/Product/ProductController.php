@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\BlogSection\BlogSectionStatusChangeRequest;
-use App\Http\Requests\Backend\BlogSection\BlogSectionStoreRequest;
-use App\Http\Requests\Backend\BlogSection\BlogSectionUpdateRequest;
 use App\Http\Services\Backend\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "@inertiajs/react";
+import Notifier from "@/Components/Utils/Notification/Notifier.jsx";
 
-export default function Page() {
+export default function Page({data: warrantyData}) {
+    const {product} = warrantyData
     const { data, setData, post, processing, errors, reset } = useForm({
+        product_slug: product.slug,
         name: "",
         district: "",
         country: "",
         bike_model: "",
-        mobile: "",
-        sealant: "",
-        photo: null,
+        mobile_number: "",
+        sealant_use_for: "",
+        image: null,
     });
 
     const [preview, setPreview] = useState(null);
@@ -26,14 +29,16 @@ export default function Page() {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        setData("photo", file);
+        setData("image", file);
         if (file) {
             setPreview(URL.createObjectURL(file));
         }
     };
 
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <Notifier/>
             <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-6 md:p-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
                     Warranty Form
@@ -97,9 +102,9 @@ export default function Page() {
                         <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
                         <input
                             type="tel"
-                            pattern="[0-9]{10}"
+                            pattern="[0-9]{11}"
                             value={data.mobile}
-                            onChange={(e) => setData("mobile", e.target.value)}
+                            onChange={(e) => setData("mobile_number", e.target.value)}
                             className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
                             required
                         />
@@ -111,7 +116,7 @@ export default function Page() {
                         <label className="block text-sm font-medium text-gray-700">Sealant Used For</label>
                         <select
                             value={data.sealant}
-                            onChange={(e) => setData("sealant", e.target.value)}
+                            onChange={(e) => setData("sealant_use_for", e.target.value)}
                             className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
                             required
                         >
@@ -120,7 +125,7 @@ export default function Page() {
                             <option value="rear">Rear Wheel</option>
                             <option value="both">Both</option>
                         </select>
-                        {errors.sealant && <p className="text-red-500 text-sm mt-1">{errors.sealant}</p>}
+                        {errors.sealant_use_for && <p className="text-red-500 text-sm mt-1">{errors.sealant_use_for}</p>}
                     </div>
 
                     {/* Photo Upload */}
@@ -141,7 +146,7 @@ export default function Page() {
                                 className="mt-3 h-32 w-32 object-cover rounded-lg border"
                             />
                         )}
-                        {errors.photo && <p className="text-red-500 text-sm mt-1">{errors.photo}</p>}
+                        {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
                     </div>
 
                     {/* Submit */}

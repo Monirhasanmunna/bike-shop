@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function getList(Request $request): Response
     {
-        $response = $this->service->getData($request->query());
+        $response = $this->handleSession( $this->service->getData($request->query()));
 
         return Inertia::render('Frontend/Home/Page', $response);
     }
