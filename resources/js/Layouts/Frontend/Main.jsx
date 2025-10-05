@@ -8,6 +8,7 @@ const Main = ({children}) => {
     setTimeout(() => window.HSStaticMethods.autoInit(), 100)
 
     const {app_settings, fileBase} = usePage().props
+    const app_name = app_settings['app_name'] ? JSON.parse(app_settings['app_name']['value']) : null;
     const social_links = app_settings['social_links'] ? JSON.parse(app_settings['social_links']['value']) : null;
     const contact_info = app_settings['contact_info'] ? JSON.parse(app_settings['contact_info']['value']) : null;
     const copyright = app_settings['copyright'] ? JSON.parse(app_settings['copyright']['value']) : null;
@@ -19,6 +20,7 @@ const Main = ({children}) => {
             <div className="overflow-hidden bg-[#FFFFFF]">
                 <Head>
                     <link rel="icon" type="image/svg+xml" href={fileBase + '/' +favicon?.path} />
+                    <title>{app_name?.content ?? 'Website'}</title>
                 </Head>
                 <div>
                     <Header />
