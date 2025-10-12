@@ -8,6 +8,7 @@ export default function LargeScreenNav({pages}) {
                 <div className={`flex gap-x-10 items-center py-3`}>
                     <ul className={`flex items-center gap-x-10 `}>
                         <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('home') ? 'active' : ''}`}><Link href={route('home')}>Home</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('product.list') ? 'active' : ''}`}><Link href={route('product.list')}>Product</Link></li>
                         {
                             pages.map((page) => (
                                 <li key={page?.id} className={`text-gray-700 font-semibold cursor-pointer uppercase nav_link ${route().current('page', { slug: page.slug }) ? 'active' : ''}`}><Link href={route('page', {slug: page.slug})} >{page?.title}</Link></li>

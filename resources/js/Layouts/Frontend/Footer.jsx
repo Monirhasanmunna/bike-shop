@@ -10,7 +10,7 @@ import {FiMail, FiPhone} from "react-icons/fi";
 import {FaSkype} from "react-icons/fa";
 import {Link} from "@inertiajs/react";
 
-const Footer = ({contact_info = null, social_links = null, copyright = null}) => {
+const Footer = ({contact_info = null, social_links = null, copyright = null, pages}) => {
     return (
         <footer className="bg-red-600 text-white">
             <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -28,31 +28,26 @@ const Footer = ({contact_info = null, social_links = null, copyright = null}) =>
                     <ul className="space-y-2">
                         <li>
                             <Link
-                                href="#about"
+                                href={route('product.list')}
                                 className="flex items-center gap-2 hover:text-gray-900 transition"
                             >
                                 <span className="w-2 h-2 bg-white rounded-full"></span>
-                                About Us
+                                Product
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                href="#distributor"
-                                className="flex items-center gap-2 hover:text-gray-900 transition"
-                            >
-                                <span className="w-2 h-2 bg-white rounded-full"></span>
-                                Distributor / Partner Page
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="#contact"
-                                className="flex items-center gap-2 hover:text-gray-900 transition"
-                            >
-                                <span className="w-2 h-2 bg-white rounded-full"></span>
-                                Contact Us
-                            </Link>
-                        </li>
+                        {
+                            pages.map((page) => (
+                                <li key={page.id}>
+                                    <Link
+                                        href={route('page', {slug: page.slug})}
+                                        className="flex items-center gap-2 hover:text-gray-900 transition"
+                                    >
+                                        <span className="w-2 h-2 bg-white rounded-full"></span>
+                                        {page.title}
+                                    </Link>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
 

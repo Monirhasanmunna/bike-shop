@@ -29,6 +29,7 @@ export default function MobileScreenNav({pages}) {
                 >
                     <ul className="flex flex-col p-4 space-y-2 text-center">
                         <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('home') ? '!text-[#F90101]' : ''}`}><Link href={route('home')}>Home</Link></li>
+                        <li className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('product.list') ? '!text-[#F90101]' : ''}`}><Link href={route('product.list')}>Product</Link></li>
                         {
                             pages.map((page) => (
                                 <li key={page.id} className={`text-gray-700 font-semibold cursor-pointer uppercase ${route().current('page', {slug: page.slug}) ? '!text-[#F90101]' : ''}`}><Link href={route('page', {slug: page.slug})}>{page.title}</Link></li>

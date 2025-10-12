@@ -17,6 +17,38 @@ class ProductService
 
     /**
      * @param array $query
+     * @return array
+     */
+    public function getListData (array $query): array
+    {
+        try {
+            $validationErrorMsg = $this->queryParams($query)->required([]);
+            if ($validationErrorMsg) {
+                return $this->response()->error($validationErrorMsg);
+            }
+
+            if (!array_key_exists('graph', $query)) {
+                $query['graph'] = '{*}';
+                $query['status'] = STATUS_ACTIVE;
+            }
+
+            $dbQuery = Product::query();
+            $dbQuery = QueryAssist::queryOrderBy($dbQuery, $query);
+            $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['status']);
+            $dbQuery = QueryAssist::queryGraphSQL($dbQuery, $query, new Product);
+            $products = $dbQuery->get();
+
+            return $this->response([
+                'products' => $products,
+            ])->success();
+        }
+        catch (\Exception $exception) {
+            return $this->response()->error($exception->getMessage());
+        }
+    }
+
+    /**
+     * @param array $query
      * @param string $slug
      * @return array
      */
