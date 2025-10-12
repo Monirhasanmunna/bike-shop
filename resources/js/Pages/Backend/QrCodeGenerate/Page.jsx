@@ -81,7 +81,7 @@ export default function Page({data:productData}){
                         <div className="w-full text-center mb-5">
                             <h1 className={`text-[22px]`}>{products.find((product) => product.slug === data.product_slug)?.name}</h1>
                         </div>
-                        <div className="w-full flex flex-wrap items-center gap-6">
+                        <div className="w-full flex flex-wrap items-center gap-3">
                             {
                                 Array.from({length: data.total}, (_,i) => (
                                         <span key={i} className="qr-code-item">

@@ -153,7 +153,46 @@
 }
 
 
+/*
+  Default styles for the screen view
+*/
+body {
+    margin: 0;
+    padding: 0;
+}
 
+/* Print-specific styles
+*/
+@media print {
+    /* 1. Hide everything on the page by default
+      (The * selector targets all elements)
+    */
+    body * {
+        visibility: hidden;
+    }
+
+    /* 2. Make the container of the QR codes visible
+    */
+    #qr-code-list, #qr-code-list * {
+        visibility: visible;
+    }
+
+    /* 3. Position the QR code list so it starts at the top-left of the print page
+    */
+    #qr-code-list {
+        position: absolute; /* Ensures it's positioned relative to the page */
+        left: 0;
+        top: 0;
+        /* Optional: Add some padding for margins on the printed page */
+        padding: 20px;
+    }
+
+    /* Optional: Style for the items within the list (to ensure they print nicely) */
+    .qr-code-item {
+        display: inline-block; /* Or use flex/grid, depending on your layout needs */
+        margin: 10px;
+    }
+}
 
 
 

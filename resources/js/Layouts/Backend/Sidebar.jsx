@@ -59,6 +59,13 @@ export default function Sidebar() {
                         </li>
 
                         <li>
+                            <Link href={route('admin.qrcode_generate.page')} className={`${route().current('admin.qrcode_generate.page') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
+                                <AiOutlineProduct  className={`size-4.5`} />
+                                Qrcode generate
+                            </Link>
+                        </li>
+
+                        <li>
                             <Link href={route('admin.warranty.list')} className={`${route().current('admin.warranty.list') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
                                 <FaRegNewspaper  className={`size-4.5`} />
                                 Warranty
