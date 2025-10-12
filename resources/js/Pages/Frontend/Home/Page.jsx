@@ -10,6 +10,13 @@ const Page = ({ data }) => {
     const {fileBase} = usePage().props
     const {hero_section, about_section, distributors, products} = data;
 
+    const handleScroll = (id) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" }); // smooth scroll
+        }
+    };
+
     return (
         <Main>
             {/* Hero Section */}
@@ -28,11 +35,12 @@ const Page = ({ data }) => {
 
                     </p>
                     <div className="flex flex-col md:flex-row gap-4 justify-center">
-                        <Link
+                        <button
                             className="px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold text-center"
+                            onClick={() => handleScroll('products')}
                         >
                             Explore Products
-                        </Link>
+                        </button>
                         <Link
                             className="px-6 py-3 bg-white text-red-600 hover:bg-gray-100 rounded-lg font-semibold text-center"
                         >
