@@ -7,6 +7,7 @@ import {AiOutlineProduct} from "react-icons/ai";
 import {FaRegNewspaper} from "react-icons/fa";
 import {LiaUsersSolid} from "react-icons/lia";
 import {LuGalleryVertical} from "react-icons/lu";
+import {MdCategory} from "react-icons/md";
 
 export default function Sidebar() {
     const { url: currentUrl } = usePage()
@@ -48,6 +49,13 @@ export default function Sidebar() {
                             <Link href={route('admin.page.list')} className={`${route().current('admin.page.list') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
                                 <RiPagesLine  className={`size-4.5`} />
                                 Page
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link href={route('admin.category.list')} className={`${route().current('admin.category.list') ? 'bg-gray-200' : ''} flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-[15px] text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white`}>
+                                <MdCategory  className={`size-4.5`} />
+                                Category
                             </Link>
                         </li>
 

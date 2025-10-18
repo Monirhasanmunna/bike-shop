@@ -13,6 +13,8 @@ class ProductService
 {
     use Request,Response, QueryAssistTrait, FileSaver;
 
+    public function __construct(private readonly CategoryService $categoryService){}
+
     /**
      * @param array $query
      * @return array
@@ -26,7 +28,7 @@ class ProductService
             }
 
             if (!array_key_exists('graph', $query)) {
-                $query['graph'] = '{*}';
+                $query['graph'] = '{*,category{name}}';
             }
 
             $dbQuery = Product::query();
@@ -41,8 +43,11 @@ class ProductService
             $count = $dbQuery->count();
             $products = $this->queryPagination($dbQuery, $query)->get();
 
+            $categories = $this->categoryService->getListData(['status' => STATUS_ACTIVE, 'graph' => '{id,name}']);
+
             return $this->response([
                 'products' => $products,
+                'categories' => $categories['data']['categories'],
                 'count' => $count,
                 'productStatus' => commonStatus(),
                 ...$query
@@ -156,7 +161,8 @@ class ProductService
     private function _formatedProductCreatedData(array $payload, string $imageName): array
     {
         return [
-            'name'              => $payload['name'],
+            'category_id'        => $payload['category_id'],
+            'name'               => $payload['name'],
             'slug'               => Str::slug($payload['name']),
             'description'        => $payload['description'],
             'image'              => $imageName,
@@ -171,7 +177,9 @@ class ProductService
      */
     private function _formatedProductUpdatedData(array $payload, string $imageName = null): array
     {
-        $data = [];
+        $data = [
+            'category_id'        => $payload['category_id'],
+        ];
 
         if(!empty($payload['name']))               $data['name']          = $payload['name'];
         if(!empty($payload['name']))               $data['slug']           = Str::slug($payload['name']);

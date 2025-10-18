@@ -153,6 +153,9 @@ export default function Page({data: productListData}){
                                         Name
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
+                                        Category
+                                    </th>
+                                    <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                         Description
                                     </th>
                                     <th className="px-4 py-2 text-left font-semibold text-gray-600 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
@@ -175,6 +178,9 @@ export default function Page({data: productListData}){
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 <span dangerouslySetInnerHTML={{ __html: product.name }} />
+                                            </td>
+                                            <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
+                                                {product.category?.name}
                                             </td>
                                             <td className="px-4 py-2 font-medium text-gray-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-400">
                                                 <span dangerouslySetInnerHTML={{ __html: truncate(product.description, 60) }} />
@@ -239,7 +245,7 @@ export default function Page({data: productListData}){
                     </div>
                 </div>
             </Main>
-            <ProductForm product={product} setProduct={setProduct} />
+            <ProductForm product={product} setProduct={setProduct} categories={productListData.categories} />
             <Alert alertData={alertData} />
         </>
 )

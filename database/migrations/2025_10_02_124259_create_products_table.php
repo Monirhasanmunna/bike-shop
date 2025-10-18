@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('category_id')->primary();
             $table->string('name');
             $table->string('slug');
             $table->string('image')->nullable();
             $table->text('description');
             $table->string('status', 20)->default(STATUS_ACTIVE);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

@@ -6,9 +6,10 @@ import {HSOverlay} from "preline";
 import Button from "@/Components/Utils/Button/Button.jsx";
 import TextEditor from "@/Components/Utils/TextEditor/TextEditor.jsx";
 
-export default function BlogForm({product, setProduct}){
+export default function BlogForm({product, setProduct, categories}){
     const {fileBase} = usePage().props
     const {data, setData, post, processing, errors, reset} = useForm({
+        category_id: '',
         name: '',
         description: '',
         image: ''
@@ -22,12 +23,14 @@ export default function BlogForm({product, setProduct}){
             setPreviewImage(`${fileBase}/${product.image}`)
             setData({
                 ...data,
+                category_id: product.category_id ?? '',
                 name: product.name ?? '',
                 description: product.description ?? '',
                 id: product.id ?? ''
             })
         } else {
             setData({
+                category_id: '',
                 name: '',
                 description: '',
                 image: ''
@@ -111,6 +114,18 @@ export default function BlogForm({product, setProduct}){
                     </div>
                     <div className="p-4 overflow-y-auto">
                         <form onSubmit={handleSubmitForm}  className={`w-full space-y-2`}>
+                            <div className="form-control">
+                                <label htmlFor="category_id" className={`label`}>Name <span className={`text-xs text-red-600`}>*</span></label>
+                                <select name="category_id" id="category_id" className={`input`} value={data.category_id} onChange={(e) => setData(prev => ({...prev, category_id: e.target.value}))}>
+                                    <option value="" hidden disabled={true}>Select once</option>
+                                    {
+                                        categories.map((category) => (
+                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+
                             <div className="form-control">
                                 <label htmlFor="name" className={`label`}>Name <span className={`text-xs text-red-600`}>*</span></label>
                                 <input type="text" className={`input`} value={data.name} onChange={(e) => setData(prev => ({...prev, name: e.target.value}))}/>
