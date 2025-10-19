@@ -15,11 +15,12 @@ class ProductController extends Controller
 
     /**
      * @param Request $request
+     * @param string $slug
      * @return Response
      */
-    public function getList(Request $request): Response
+    public function getList(Request $request, string $slug): Response
     {
-        $response = $this->service->getListData($request->query());
+        $response = $this->service->getListData($request->query(), $slug);
 
         return Inertia::render('Frontend/Product/Page', $response);
     }

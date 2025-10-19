@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\AppSetting;
+use App\Models\Category;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -43,6 +44,7 @@ class HandleInertiaRequests extends Middleware
             'logo' => isset($settings['logo']) ? json_decode($settings['logo']->value, true) : null,
             'app_settings' => $settings,
             'pages' => Page::where('status', STATUS_ACTIVE)->select('id', 'title', 'slug')->get(),
+            'categories' => Category::where('status', STATUS_ACTIVE)->select('id', 'name', 'slug')->get(),
         ];
     }
 }

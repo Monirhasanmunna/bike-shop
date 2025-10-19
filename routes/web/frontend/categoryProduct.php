@@ -4,4 +4,5 @@ use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/product/{slug}', [ProductController::class, 'getData'])->name('product_details');
+Route::get('/category/{slug}', [ProductController::class, 'getList'])->name('product.list');
+

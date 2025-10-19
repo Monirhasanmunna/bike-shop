@@ -2,6 +2,7 @@
 namespace App\Http\Services\Frontend;
 
 use App\Models\AboutSection;
+use App\Models\Category;
 use App\Models\Distributor;
 use App\Models\HeroSection;
 use App\Models\Product;
@@ -17,9 +18,10 @@ class ProductService
 
     /**
      * @param array $query
+     * @param string $slug
      * @return array
      */
-    public function getListData (array $query): array
+    public function getListData (array $query, string $slug): array
     {
         try {
             $validationErrorMsg = $this->queryParams($query)->required([]);
@@ -32,7 +34,13 @@ class ProductService
                 $query['status'] = STATUS_ACTIVE;
             }
 
-            $dbQuery = Product::query();
+            $category = Category::where('slug', $slug)->firstOrFail();
+
+            if(!$category){
+                return $this->response()->error('Category not found');
+            }
+
+            $dbQuery = Product::where('category_id', $category->id);
             $dbQuery = QueryAssist::queryOrderBy($dbQuery, $query);
             $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['status']);
             $dbQuery = QueryAssist::queryGraphSQL($dbQuery, $query, new Product);

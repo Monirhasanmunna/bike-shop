@@ -26,15 +26,15 @@ const Footer = ({contact_info = null, social_links = null, copyright = null, pag
                 <div>
                     <h3 className="font-semibold mb-4">Quick Links</h3>
                     <ul className="space-y-2">
-                        <li>
-                            <Link
-                                href={route('product.list')}
-                                className="flex items-center gap-2 hover:text-gray-900 transition"
-                            >
-                                <span className="w-2 h-2 bg-white rounded-full"></span>
-                                Product
-                            </Link>
-                        </li>
+                        {/*<li>*/}
+                        {/*    <Link*/}
+                        {/*        href={route('product.list')}*/}
+                        {/*        className="flex items-center gap-2 hover:text-gray-900 transition"*/}
+                        {/*    >*/}
+                        {/*        <span className="w-2 h-2 bg-white rounded-full"></span>*/}
+                        {/*        Product*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         {
                             pages.map((page) => (
                                 <li key={page.id}>

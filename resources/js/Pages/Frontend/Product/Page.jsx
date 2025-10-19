@@ -20,33 +20,41 @@ export default function Page({ data }) {
                     </div>
 
                     {/* Content */}
-                    <div className="w-full grid sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                        {
-                            products.map((product) => (
-                                <Link href={route('product_details', {slug:product.slug})}
-                                      key={product.id}
-                                      className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl overflow-hidden flex flex-col border border-gray-100"
-                                >
-                                    <div className="w-full flex justify-center bg-gray-50">
-                                        <img
-                                            src={`${fileBase}/${product?.image}`}
-                                            alt={product}
-                                            className="w-full h-68 object-cover"
-                                        />
-                                    </div>
-                                    <div className="p-6 flex flex-col items-center text-center flex-1">
-                                        <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                                        <div className="mt-3">
-                                            <QRCode
-                                                value={route('warranty', product.slug)}
-                                                size={80}
-                                            />
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))
-                        }
-                    </div>
+                    {
+                        products.length > 0 ? (
+                            <div className="w-full grid sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                                {
+                                    products.map((product) => (
+                                        <Link href={route('product_details', {slug:product.slug})}
+                                              key={product.id}
+                                              className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl overflow-hidden flex flex-col border border-gray-100"
+                                        >
+                                            <div className="w-full flex justify-center bg-gray-50">
+                                                <img
+                                                    src={`${fileBase}/${product?.image}`}
+                                                    alt={product}
+                                                    className="w-full h-68 object-cover"
+                                                />
+                                            </div>
+                                            <div className="p-6 flex flex-col items-center text-center flex-1">
+                                                <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                                                {/*<div className="mt-3">*/}
+                                                {/*    <QRCode*/}
+                                                {/*        value={route('warranty', product.slug)}*/}
+                                                {/*        size={80}*/}
+                                                {/*    />*/}
+                                                {/*</div>*/}
+                                            </div>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        ) : (
+                            <div className={`w-full flex justify-center items-center`}>
+                                <h2 className={`text-[22px] font-semibold`}>No Product Found</h2>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </Main>

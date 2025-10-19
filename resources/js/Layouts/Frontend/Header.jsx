@@ -3,12 +3,12 @@ import {Link, usePage} from "@inertiajs/react";
 import LargeScreenNav from "@/Components/Frontend/Home/HeaderSection/LargeScreenNav.jsx";
 import MobileScreenNav from "@/Components/Frontend/Home/HeaderSection/MobileScreenNav.jsx";
 
-const Header = ({pages}) => {
+const Header = ({pages, categories}) => {
 
     return (
         <div className="w-full">
-            <LargeScreenNav pages={pages} />
-            <MobileScreenNav pages={pages} />
+            <LargeScreenNav pages={pages} categories={categories} />
+            <MobileScreenNav pages={pages} categories={categories} />
         </div>
     )
 }
