@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import QRCode from "react-qr-code";
+import {FaFlask, FaGlobeAmericas, FaLeaf, FaTruckMoving} from "react-icons/fa";
 
 const Page = ({ data }) => {
     const {fileBase} = usePage().props
@@ -21,32 +22,32 @@ const Page = ({ data }) => {
         <Main>
             {/* Hero Section */}
             <section
-                className="relative h-screen flex items-center justify-center bg-cover bg-center"
+                className="relative h-[calc(100vh-400px)]  flex items-center justify-center bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${hero_section?.image})`,
                 }}
             >
                 <div className="absolute inset-0 bg-black/60" />
-                <div className="relative z-10 text-center text-white max-w-3xl px-4">
+                <div className="relative z-10 top-5 text-center text-white max-w-3xl px-4">
                     <h1 className="text-3xl md:text-6xl font-bold mb-4" dangerouslySetInnerHTML={{__html: hero_section?.title}}>
 
                     </h1>
                     <p className="text-base md:text-2xl mb-6" dangerouslySetInnerHTML={{__html: hero_section?.subtitle}}>
 
                     </p>
-                    <div className="flex flex-col md:flex-row gap-4 justify-center">
-                        <button
-                            className="px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold text-center"
-                            onClick={() => handleScroll('products')}
-                        >
-                            Explore Products
-                        </button>
-                        <Link
-                            className="px-6 py-3 bg-white text-red-600 hover:bg-gray-100 rounded-lg font-semibold text-center"
-                        >
-                            Become a Distributor
-                        </Link>
-                    </div>
+                    {/*<div className="flex flex-col md:flex-row gap-4 justify-center">*/}
+                    {/*    <button*/}
+                    {/*        className="px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold text-center"*/}
+                    {/*        onClick={() => handleScroll('products')}*/}
+                    {/*    >*/}
+                    {/*        Explore Products*/}
+                    {/*    </button>*/}
+                    {/*    <Link*/}
+                    {/*        className="px-6 py-3 bg-white text-red-600 hover:bg-gray-100 rounded-lg font-semibold text-center"*/}
+                    {/*    >*/}
+                    {/*        Become a Distributor*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
                 </div>
             </section>
 
@@ -66,8 +67,7 @@ const Page = ({ data }) => {
                     <div className="md:w-1/2 text-center md:text-left">
                         <h2 className="text-3xl md:text-4xl font-bold" dangerouslySetInnerHTML={{__html: about_section?.title}}></h2>
                         <p className="text-gray-700 mb-6 text-base md:text-lg" dangerouslySetInnerHTML={{__html: about_section?.description}}></p>
-                        <Link
-                            className="inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition"
+                        <Link href={route('page', { slug: 'about' })} className="inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition"
                         >
                             Learn More → About Us
                         </Link>
@@ -97,12 +97,12 @@ const Page = ({ data }) => {
                                 </div>
                                 <div className="p-6 flex flex-col items-center text-center flex-1">
                                     <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                                    <div className="mt-3">
-                                        <QRCode
-                                            value={route('warranty', product.slug)}
-                                            size={80}
-                                        />
-                                    </div>
+                                    {/*<div className="mt-3">*/}
+                                    {/*    <QRCode*/}
+                                    {/*        value={route('warranty', product.slug)}*/}
+                                    {/*        size={80}*/}
+                                    {/*    />*/}
+                                    {/*</div>*/}
                                 </div>
                             </Link>
                         ))
@@ -139,17 +139,17 @@ const Page = ({ data }) => {
                 </h2>
                 <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
                     {[
-                        "Innovation & Research",
-                        "International Standards",
-                        "Eco-Friendly Formulations",
-                        "Strong Distribution Network",
+                        { title: "Innovation & Research", icon: <FaFlask className="text-4xl text-gray-600 mb-4" /> },
+                        { title: "International Standards", icon: <FaGlobeAmericas className="text-4xl text-gray-600 mb-4" /> },
+                        { title: "Eco-Friendly Formulations", icon: <FaLeaf className="text-4xl text-gray-600 mb-4" /> },
+                        { title: "Strong Distribution Network", icon: <FaTruckMoving className="text-4xl text-gray-600 mb-4" /> },
                     ].map((item, index) => (
                         <div
                             key={index}
                             className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-6 flex flex-col items-center text-center border border-gray-100"
                         >
-                            <span className="text-red-600 text-4xl mb-4">✔</span>
-                            <h3 className="font-semibold text-lg">{item}</h3>
+                            {item.icon}
+                            <h3 className="font-semibold text-lg">{item.title}</h3>
                         </div>
                     ))}
                 </div>

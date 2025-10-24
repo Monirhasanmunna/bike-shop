@@ -104,9 +104,7 @@ export default function Page({data: pageListData}){
                             <h2 className="font-medium text-xl leading-6 text-neutral-700 dark:text-neutral-300">Page</h2>
                         </div>
                         <Link href={route('admin.page.create')}
-                                className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-yellow-400 text-black hover:bg-yellow-500"
-                                aria-haspopup="dialog" aria-expanded="false" aria-controls="page-form"
-                                data-hs-overlay="#page-form">
+                                className="py-1.5 px-5 inline-flex items-center gap-x-2 text-sm font-medium rounded bg-yellow-400 text-black hover:bg-yellow-500">
                             Add New
                         </Link>
                     </div>
@@ -229,7 +227,6 @@ export default function Page({data: pageListData}){
                     </div>
                 </div>
             </Main>
-            <ProductForm page={page} setPage={setPage} />
             <Alert alertData={alertData} />
         </>
 )
