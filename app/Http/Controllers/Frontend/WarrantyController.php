@@ -40,7 +40,7 @@ class WarrantyController extends Controller
             'bike_model' => 'required',
             'mobile_number' => 'required|min: 11|max: 11',
             'sealant_use_for' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg,webp|max:5112',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
 
         $response = $this->service->storeData($request->all());
