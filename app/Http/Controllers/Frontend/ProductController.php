@@ -12,7 +12,6 @@ class ProductController extends Controller
 {
     public function __construct( private readonly ProductService $service){}
 
-
     /**
      * @param Request $request
      * @param string $slug
@@ -23,6 +22,17 @@ class ProductController extends Controller
         $response = $this->service->getListData($request->query(), $slug);
 
         return Inertia::render('Frontend/Product/Page', $response);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getAllData(Request $request): Response
+    {
+        $response = $this->service->getAllData($request->query());
+
+        return Inertia::render('Frontend/Product/All/Page', $response);
     }
 
     /**

@@ -24,7 +24,7 @@ class HomeService
             $hero_section   = HeroSection::where('page_name', 'home')->first();
             $about_section  = AboutSection::first();
             $distributors  = Distributor::where('status', STATUS_ACTIVE)->get();
-            $products      = Product::where('status', STATUS_ACTIVE)->get();
+            $products      = Product::where('status', STATUS_ACTIVE)->get()->take(12);
 
             return $this->response([
                 'hero_section' => $hero_section,

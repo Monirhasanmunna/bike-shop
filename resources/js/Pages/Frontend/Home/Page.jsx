@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import QRCode from "react-qr-code";
-import {FaFlask, FaGlobeAmericas, FaLeaf, FaTruckMoving} from "react-icons/fa";
+import {FaArrowRight, FaFlask, FaGlobeAmericas, FaLeaf, FaTruckMoving} from "react-icons/fa";
 
 const Page = ({ data }) => {
     const {fileBase} = usePage().props
@@ -22,7 +22,7 @@ const Page = ({ data }) => {
         <Main>
             {/* Hero Section */}
             <section
-                className="relative h-[calc(100vh-400px)]  flex items-center justify-center bg-cover bg-center"
+                className="relative h-[calc(100vh-300px)]  flex items-center justify-center bg-cover bg-center"
                 style={{
                     backgroundImage: `url(${hero_section?.image})`,
                 }}
@@ -53,13 +53,13 @@ const Page = ({ data }) => {
 
             {/* About Preview */}
             <section className="py-16 bg-gray-50 px-4">
-                <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-16 flex flex-col md:flex-row items-center gap-8">
+                <div className="container mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row  gap-8">
                     {/* Optional image or illustration */}
                     <div className="md:w-1/2 flex justify-center">
                         <img
                             src={`${fileBase}/${about_section?.image}`}
                             alt="About Zelto Global"
-                            className="w-full max-w-sm h-auto rounded-xl object-cover"
+                            className="w-full  h-[450px] rounded-xl object-cover"
                         />
                     </div>
 
@@ -81,32 +81,37 @@ const Page = ({ data }) => {
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
                     Featured Products
                 </h2>
-                <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                    {
-                        products.map((product) => (
-                            <Link href={route('product_details', {slug:product.slug})}
-                                key={product.id}
-                                className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl overflow-hidden flex flex-col border border-gray-100"
-                            >
-                                <div className="w-full flex justify-center bg-gray-50">
-                                    <img
-                                        src={`${fileBase}/${product?.image}`}
-                                        alt={product}
-                                        className="w-full h-68 object-cover"
-                                    />
-                                </div>
-                                <div className="p-6 flex flex-col items-center text-center flex-1">
-                                    <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                                    {/*<div className="mt-3">*/}
-                                    {/*    <QRCode*/}
-                                    {/*        value={route('warranty', product.slug)}*/}
-                                    {/*        size={80}*/}
-                                    {/*    />*/}
-                                    {/*</div>*/}
-                                </div>
-                            </Link>
-                        ))
-                    }
+                <div className="max-w-7xl mx-auto">
+                    <div className="w-full flex justify-end items-center mb-5">
+                        <Link href={route('all_product')} className={`text-sm bg-blue-600 px-3 py-1 rounded text-white flex items-center gap-1`}>Sea all <FaArrowRight className={`size-3`} /></Link>
+                    </div>
+                    <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+                        {
+                            products.map((product) => (
+                                <Link href={route('product_details', {slug:product.slug})}
+                                      key={product.id}
+                                      className="bg-white shadow-lg hover:shadow-2xl transition rounded-xl overflow-hidden flex flex-col border border-gray-100"
+                                >
+                                    <div className="w-full flex justify-center bg-gray-50">
+                                        <img
+                                            src={`${fileBase}/${product?.image}`}
+                                            alt={product}
+                                            className="w-full h-68 object-cover"
+                                        />
+                                    </div>
+                                    <div className="p-6 flex flex-col items-center text-center flex-1">
+                                        <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                                        {/*<div className="mt-3">*/}
+                                        {/*    <QRCode*/}
+                                        {/*        value={route('warranty', product.slug)}*/}
+                                        {/*        size={80}*/}
+                                        {/*    />*/}
+                                        {/*</div>*/}
+                                    </div>
+                                </Link>
+                            ))
+                        }
+                    </div>
                 </div>
             </section>
 
@@ -157,37 +162,37 @@ const Page = ({ data }) => {
 
 
             {/* Testimonials / Partners */}
-            <section className="py-16 max-w-6xl mx-auto px-4">
-                <h2 className="text-2xl md:text-3xl text-center font-bold mb-8">
-                    Trusted by Workshops & Distributors
-                </h2>
-                <Swiper
-                    modules={[Autoplay]}
-                    spaceBetween={30}
-                    slidesPerView={2}
-                    autoplay={{
-                        delay: 2000,
-                        disableOnInteraction: false,
-                    }}
-                    loop={true}
-                    breakpoints={{
-                        640: { slidesPerView: 3 },
-                        768: { slidesPerView: 4 },
-                        1024: { slidesPerView: 6 },
-                    }}
-                    className="flex items-center"
-                >
-                    {distributors.map((distributor) => (
-                        <SwiperSlide key={distributor.id} className="flex justify-center">
-                            <img
-                                src={`${fileBase}/${distributor?.image}`}
-                                alt={distributor?.title}
-                                className="h-[150px] w-full rounded object-cover"
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </section>
+            {/*<section className="py-16 max-w-6xl mx-auto px-4">*/}
+            {/*    <h2 className="text-2xl md:text-3xl text-center font-bold mb-8">*/}
+            {/*        Trusted by Workshops & Distributors*/}
+            {/*    </h2>*/}
+            {/*    <Swiper*/}
+            {/*        modules={[Autoplay]}*/}
+            {/*        spaceBetween={30}*/}
+            {/*        slidesPerView={2}*/}
+            {/*        autoplay={{*/}
+            {/*            delay: 2000,*/}
+            {/*            disableOnInteraction: false,*/}
+            {/*        }}*/}
+            {/*        loop={true}*/}
+            {/*        breakpoints={{*/}
+            {/*            640: { slidesPerView: 3 },*/}
+            {/*            768: { slidesPerView: 4 },*/}
+            {/*            1024: { slidesPerView: 6 },*/}
+            {/*        }}*/}
+            {/*        className="flex items-center"*/}
+            {/*    >*/}
+            {/*        {distributors.map((distributor) => (*/}
+            {/*            <SwiperSlide key={distributor.id} className="flex justify-center">*/}
+            {/*                <img*/}
+            {/*                    src={`${fileBase}/${distributor?.image}`}*/}
+            {/*                    alt={distributor?.title}*/}
+            {/*                    className="h-[150px] w-full rounded object-cover"*/}
+            {/*                />*/}
+            {/*            </SwiperSlide>*/}
+            {/*        ))}*/}
+            {/*    </Swiper>*/}
+            {/*</section>*/}
         </Main>
     );
 };

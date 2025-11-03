@@ -37,22 +37,24 @@ export default function Page({data: warrantyData}) {
 
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-            <Notifier/>
-            <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-                    Warranty Form
+        <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100 p-6">
+            <Notifier />
+
+            <div className="w-full max-w-lg bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl border border-blue-100 p-8 md:p-10">
+                <h2 className="text-3xl font-semibold text-center text-blue-700 mb-6">
+                    🛠️ Warranty Registration
                 </h2>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Name</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                         <input
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Enter your full name"
                             required
                         />
                         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -60,12 +62,13 @@ export default function Page({data: warrantyData}) {
 
                     {/* District */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">District</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
                         <input
                             type="text"
                             value={data.district}
                             onChange={(e) => setData("district", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Enter your district"
                             required
                         />
                         {errors.district && <p className="text-red-500 text-sm mt-1">{errors.district}</p>}
@@ -73,12 +76,13 @@ export default function Page({data: warrantyData}) {
 
                     {/* Country */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Country</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
                         <input
                             type="text"
                             value={data.country}
                             onChange={(e) => setData("country", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Enter your country"
                             required
                         />
                         {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
@@ -86,26 +90,28 @@ export default function Page({data: warrantyData}) {
 
                     {/* Bike Model */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Bike Model</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Bike Model</label>
                         <input
                             type="text"
                             value={data.bike_model}
                             onChange={(e) => setData("bike_model", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Ex: Yamaha R15 V4"
                             required
                         />
                         {errors.bike_model && <p className="text-red-500 text-sm mt-1">{errors.bike_model}</p>}
                     </div>
 
-                    {/* Mobile */}
+                    {/* Mobile Number */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
                         <input
                             type="tel"
                             pattern="[0-9]{11}"
                             value={data.mobile}
                             onChange={(e) => setData("mobile_number", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Ex: 017XXXXXXXX"
                             required
                         />
                         {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
@@ -113,11 +119,11 @@ export default function Page({data: warrantyData}) {
 
                     {/* Sealant Used For */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Sealant Used For</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Sealant Used For</label>
                         <select
                             value={data.sealant}
                             onChange={(e) => setData("sealant_use_for", e.target.value)}
-                            className="mt-1 w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 p-2.5"
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition bg-white"
                             required
                         >
                             <option value="">Select...</option>
@@ -130,20 +136,20 @@ export default function Page({data: warrantyData}) {
 
                     {/* Photo Upload */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Upload Photo</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Upload Photo</label>
                         <input
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className="mt-1 w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
-                         file:rounded-lg file:border-0 file:text-sm file:font-semibold
-                         file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0 file:font-semibold
+                        file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 transition"
                         />
                         {preview && (
                             <img
                                 src={preview}
                                 alt="Preview"
-                                className="mt-3 h-32 w-32 object-cover rounded-lg border"
+                                className="mt-3 h-32 w-32 object-cover rounded-lg border shadow-sm"
                             />
                         )}
                         {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
@@ -154,14 +160,15 @@ export default function Page({data: warrantyData}) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className={`w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg shadow transition
-                            ${processing ? "opacity-70 cursor-not-allowed" : "hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"}`}
+                            className={`w-full bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold py-3 rounded-lg shadow-md transition-transform duration-300
+                        ${processing ? "opacity-70 cursor-not-allowed" : "hover:scale-[1.02] hover:shadow-lg"}`}
                         >
-                            {processing ? "Submitting..." : "Submit"}
+                            {processing ? "Submitting..." : "Submit Warranty"}
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+
     );
 }

@@ -30,7 +30,7 @@ class ProductService
             }
 
             if (!array_key_exists('graph', $query)) {
-                $query['graph'] = '{*}';
+                $query['graph'] = '{*,category{name}}';
                 $query['status'] = STATUS_ACTIVE;
             }
 
@@ -41,6 +41,40 @@ class ProductService
             }
 
             $dbQuery = Product::where('category_id', $category->id);
+            $dbQuery = QueryAssist::queryOrderBy($dbQuery, $query);
+            $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['status']);
+            $dbQuery = QueryAssist::queryGraphSQL($dbQuery, $query, new Product);
+            $products = $dbQuery->get();
+
+            return $this->response([
+                'products' => $products,
+                'category' => $category,
+            ])->success();
+        }
+        catch (\Exception $exception) {
+            return $this->response()->error($exception->getMessage());
+        }
+    }
+
+
+    /**
+     * @param array $query
+     * @return array
+     */
+    public function getAllData (array $query): array
+    {
+        try {
+            $validationErrorMsg = $this->queryParams($query)->required([]);
+            if ($validationErrorMsg) {
+                return $this->response()->error($validationErrorMsg);
+            }
+
+            if (!array_key_exists('graph', $query)) {
+                $query['graph'] = '{*,category{name}}';
+                $query['status'] = STATUS_ACTIVE;
+            }
+
+            $dbQuery = Product::query();
             $dbQuery = QueryAssist::queryOrderBy($dbQuery, $query);
             $dbQuery = QueryAssist::queryWhere($dbQuery, $query, ['status']);
             $dbQuery = QueryAssist::queryGraphSQL($dbQuery, $query, new Product);

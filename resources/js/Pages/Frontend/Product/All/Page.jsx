@@ -4,8 +4,9 @@ import {Link, usePage} from "@inertiajs/react";
 import QRCode from "react-qr-code";
 
 export default function Page({ data }) {
+    console.log(data);
     const {fileBase} = usePage().props
-    const {products, category} = data
+    const {products} = data
     return (
         <Main>
             <div className="min-h-screen px-4 py-12 bg-gray-50">
@@ -14,7 +15,7 @@ export default function Page({ data }) {
                     {/* Title */}
                     <div className="flex justify-center">
                         <h1 className="text-3xl md:text-4xl font-bold mb-10 text-gray-800 text-center inline-flex border-b pb-2">
-                            {category.name}
+                            All Product
                         </h1>
                     </div>
 
