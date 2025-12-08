@@ -10,7 +10,7 @@ import { FiMail, FiPhone } from "react-icons/fi"
 import { FaSkype } from "react-icons/fa"
 import { Link } from "@inertiajs/react"
 
-const Footer = ({ contact_info = null, social_links = null, copyright = null, pages }) => {
+const Footer = ({ contact_info = null, social_links = null, copyright = null, app_description = null, pages }) => {
     return (
         <footer className="bg-gradient-to-r from-purple-100 via-indigo-100 to-blue-100 text-gray-700">
             <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -18,9 +18,8 @@ const Footer = ({ contact_info = null, social_links = null, copyright = null, pa
                 {/* Brand / Logo */}
                 <div>
                     <h2 className="text-2xl font-bold mb-4 text-indigo-800">Zelto Global</h2>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                        Premium tyre sealants, oils & car care products trusted worldwide.
-                    </p>
+                    <div className="text-sm text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{__html: app_description?.content}}>
+                    </div>
                 </div>
 
                 {/* Quick Links */}
@@ -48,9 +47,9 @@ const Footer = ({ contact_info = null, social_links = null, copyright = null, pa
                         Have questions or want to partner with us?
                     </p>
                     <div className="flex space-x-4">
-                        <a href="#" className="hover:text-gray-900 transition">🌐</a>
-                        <a href="#" className="hover:text-gray-900 transition">📧</a>
-                        <a href="#" className="hover:text-gray-900 transition">📞</a>
+                        <a href={contact_info.skype} className="hover:text-gray-900 transition">🌐</a>
+                        <a href={contact_info.email} className="hover:text-gray-900 transition">📧</a>
+                        <a href={contact_info.phone} className="hover:text-gray-900 transition">📞</a>
                     </div>
                 </div>
             </div>

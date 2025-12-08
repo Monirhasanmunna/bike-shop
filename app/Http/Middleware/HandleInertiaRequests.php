@@ -32,7 +32,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $settings = AppSetting::whereIn('key', ['favicon', 'logo', 'app_name', 'contact_info', 'social_links', 'copyright'])->select('key', 'value')->get()->keyBy('key');
+        $settings = AppSetting::whereIn('key', ['favicon', 'logo', 'app_name', 'app_description', 'contact_info', 'social_links', 'copyright'])->select('key', 'value')->get()->keyBy('key');
 
         return [
             ...parent::share($request),

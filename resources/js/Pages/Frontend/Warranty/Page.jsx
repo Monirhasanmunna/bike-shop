@@ -60,18 +60,19 @@ export default function Page({data: warrantyData}) {
                         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
 
-                    {/* District */}
+                    {/* Mobile Number */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
                         <input
-                            type="text"
-                            value={data.district}
-                            onChange={(e) => setData("district", e.target.value)}
+                            type="tel"
+                            pattern="[0-9]{11}"
+                            value={data.mobile}
+                            onChange={(e) => setData("mobile_number", e.target.value)}
                             className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
-                            placeholder="Enter your district"
+                            placeholder="Ex: 017XXXXXXXX"
                             required
                         />
-                        {errors.district && <p className="text-red-500 text-sm mt-1">{errors.district}</p>}
+                        {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
                     </div>
 
                     {/* Country */}
@@ -88,6 +89,20 @@ export default function Page({data: warrantyData}) {
                         {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
                     </div>
 
+                    {/* District */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
+                        <input
+                            type="text"
+                            value={data.district}
+                            onChange={(e) => setData("district", e.target.value)}
+                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
+                            placeholder="Enter your district"
+                            required
+                        />
+                        {errors.district && <p className="text-red-500 text-sm mt-1">{errors.district}</p>}
+                    </div>
+
                     {/* Bike Model */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Bike Model</label>
@@ -100,21 +115,6 @@ export default function Page({data: warrantyData}) {
                             required
                         />
                         {errors.bike_model && <p className="text-red-500 text-sm mt-1">{errors.bike_model}</p>}
-                    </div>
-
-                    {/* Mobile Number */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-                        <input
-                            type="tel"
-                            pattern="[0-9]{11}"
-                            value={data.mobile}
-                            onChange={(e) => setData("mobile_number", e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 p-3 transition"
-                            placeholder="Ex: 017XXXXXXXX"
-                            required
-                        />
-                        {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
                     </div>
 
                     {/* Sealant Used For */}

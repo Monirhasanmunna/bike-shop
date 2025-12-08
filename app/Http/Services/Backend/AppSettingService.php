@@ -79,10 +79,12 @@ class AppSettingService
 
             $others = [
                 "app_name",
+                "app_description",
                 "contact_info",
                 "social_links",
                 "copyright"
             ];
+            
             foreach ($others as $key){
                 if(array_key_exists($key, $payload)){
                     $appSetting = AppSetting::where('key', $key)->first();

@@ -9,6 +9,7 @@ const Main = ({children}) => {
 
     const {app_settings, fileBase, pages, categories} = usePage().props
     const app_name = app_settings['app_name'] ? JSON.parse(app_settings['app_name']['value']) : null;
+    const app_description = app_settings['app_description'] ? JSON.parse(app_settings['app_description']['value']) : null;
     const social_links = app_settings['social_links'] ? JSON.parse(app_settings['social_links']['value']) : null;
     const contact_info = app_settings['contact_info'] ? JSON.parse(app_settings['contact_info']['value']) : null;
     const copyright = app_settings['copyright'] ? JSON.parse(app_settings['copyright']['value']) : null;
@@ -29,7 +30,7 @@ const Main = ({children}) => {
                     {children}
                 </div>
                 <div>
-                    <Footer pages={pages} social_links={social_links} contact_info={contact_info} copyright={copyright} />
+                    <Footer pages={pages} social_links={social_links} contact_info={contact_info} copyright={copyright} app_description={app_description} />
                 </div>
             </div>
         </>

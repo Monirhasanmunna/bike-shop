@@ -14,6 +14,9 @@ export default function Page({data:appSettingData}){
         app_name: {
             content: ''
         },
+        app_description: {
+            content: ''
+        },
         favicon: {
             path: '',
         },
@@ -129,6 +132,12 @@ export default function Page({data:appSettingData}){
                             <div className="form-control">
                                 <label className={`label`} htmlFor="app_name">App Name :</label>
                                 <input type="text" value={data.app_name?.content} onChange={handleInputText} id='content' name={`app_name`} placeholder={`Enter frontend name`} className={`input`}/>
+                            </div>
+                        </div>
+                        <div className="w-full mb-5">
+                            <div className="form-control">
+                                <label className={`label`} htmlFor="app_description">App Description :</label>
+                                <input type="text" value={data.app_description?.content} onChange={handleInputText} id='content' name={`app_description`} placeholder={`Enter frontend description`} className={`input`}/>
                             </div>
                         </div>
                         <div className="w-full flex justify-start gap-10">

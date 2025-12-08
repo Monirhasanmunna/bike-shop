@@ -52,14 +52,14 @@ const Page = ({ data }) => {
             </section>
 
             {/* About Preview */}
-            <section className="py-16 bg-gray-50">
-                <div className="container mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row  gap-8">
+            <section className="py-16">
+                <div className="container mx-auto  rounded-2xl p-8 flex flex-col md:flex-row  gap-8">
                     {/* Optional image or illustration */}
                     <div className="md:w-1/2 flex justify-center">
                         <img
                             src={`${fileBase}/${about_section?.image}`}
                             alt="About Zelto Global"
-                            className="w-full  h-[450px] rounded-xl object-cover"
+                            className="w-full  h-[250px] rounded-xl object-cover"
                         />
                     </div>
 
@@ -77,7 +77,7 @@ const Page = ({ data }) => {
 
 
             {/* Featured Products */}
-            <section id="products" className="py-16 px-4">
+            <section id="products" className="py-16">
                 <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
                     Featured Products
                 </h2>

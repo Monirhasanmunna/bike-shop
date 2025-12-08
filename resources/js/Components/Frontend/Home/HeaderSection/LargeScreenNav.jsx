@@ -9,9 +9,9 @@ export default function LargeScreenNav({ pages, categories }) {
         <div className="w-full hidden lg:block border-b border-gray-200 bg-gray-50 shadow relative z-[999]">
             <div className="container flex items-center justify-between h-[80px] relative">
                 {/* Logo */}
-                <div className="p-5">
-                    <img src={`${fileBase}/${logo?.path}`} alt="logo" className="h-13" />
-                </div>
+                <Link href={route('home')} className="p-1">
+                    <img src={`${fileBase}/${logo?.path}`} alt="logo" className="h-25" />
+                </Link>
 
                 {/* Left Nav Links */}
                 <div className="flex gap-x-10 items-center py-3">
